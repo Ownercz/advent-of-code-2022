@@ -36,14 +36,6 @@ def priority_count():
 
     return priority_dict
 
-def char_count():
-    priority_dict = {}
-    for single_char in list(string.ascii_lowercase):
-        priority_dict[single_char] = 0
-    for single_char in list(string.ascii_uppercase):
-        priority_dict[single_char] = 0
-    return priority_dict
-
 def points(valued_chars, entry_line ):
     sum = 0
     if len(entry_line) == 0:
