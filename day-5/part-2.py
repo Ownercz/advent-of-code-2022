@@ -16,7 +16,7 @@ def move_crane_command(regex, line):
         move_result["from"] = (match.group(2))
         move_result["to"] = (match.group(3))
     if len(move_result) > 0:    return move_result
-    else: print("LINE " + line) ;return None
+    else: print("LINE " + line) ; return None
 
 def process_move_crane(command,cranes):
     if command != None:
@@ -46,6 +46,24 @@ def process_move_crane(command,cranes):
             move_crane = move_crane -1
     else: print("Nothing was moved.")
     return cranes
+
+def cratemover_9001(command,cranes):
+    if command != None:
+        print(cranes)
+        move_crane = int(command["move"])
+        from_crane = int(command["from"])-1
+        to_crane = int(command["to"])-1
+        print("Will move times:" + str(move_crane))
+        moved = []
+        while move_crane > 0:
+            moved.append(cranes[from_crane].pop())
+            move_crane = move_crane -1
+        moved.reverse()
+        for item in moved:
+            cranes[to_crane].append(item)
+    else: print("Nothing was moved.")
+    return cranes
+
 if __name__ == "__main__":
     regex = r"move\ (\d+)\ from\ (\d)\ to\ (\d)"
     crane = []
@@ -66,7 +84,7 @@ if __name__ == "__main__":
     #crane.append(["P"])
 
     for line in read_input():
-        crane = process_move_crane(move_crane_command(regex, line), crane)
+        crane = cratemover_9001(move_crane_command(regex, line), crane)
     print(crane)
     for crane_entry in crane:
         if len(crane_entry) > 0:
